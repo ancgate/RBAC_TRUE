@@ -56,7 +56,6 @@ public class RoleController {
     }
 
     public String insert() {
-        
         for (Permissions perm : selectedPermissions  ){
         role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
         }        
