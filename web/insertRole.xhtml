@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Id:" for="id" />
+                    <h:inputText id="id" value="#{roleController.role.id}" title="Id" required="true" requiredMessage="The Id field is required."/>
+                    <h:outputLabel value="Name:" for="name" />
+                    <h:inputText id="name" value="#{roleController.role.name}" title="Name" />
+                    <h:outputLabel value="Description:" for="description" />
+                    <h:inputText id="description" value="#{roleController.role.description}" title="Description" />
+                    
+                    <h:panelGrid columns="3">
+                        <h:outputLabel for="menu" value="Liste des permissions" />
+                        <p:selectCheckboxMenu id="menu" value="#{roleController.selectedPermissions}" label="Permissions"
+                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                            <f:selectItems value="#{roleController.permission}" var="perm" itemLabel="#{perm.name}" itemValue="#{perm.id}"/>
+                        </p:selectCheckboxMenu>
+                        <h:commandButton value="insertRole" action="#{roleController.insert()}"></h:commandButton>
+                    </h:panelGrid>
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+
