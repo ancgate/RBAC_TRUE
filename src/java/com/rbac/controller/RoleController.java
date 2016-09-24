@@ -56,7 +56,7 @@ public class RoleController {
     }
 
     public String insertRole() {
-        for (Permissions perm : selectedPermissions ){
+        for (Permissions perm : getSelectedPermissions() ){
         role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
         }        
         this.roleFacade.create(role);
