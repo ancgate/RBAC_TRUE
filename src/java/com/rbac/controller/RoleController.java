@@ -55,8 +55,8 @@ public class RoleController {
         return roleFacade.findAll();
     }
 
-    public String insert() {
-        for (Permissions perm : selectedPermissions  ){
+    public String insertRole() {
+        for (Permissions perm : selectedPermissions ){
         role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
         }        
         this.roleFacade.create(role);
@@ -65,17 +65,17 @@ public class RoleController {
 
     }
 
-    public void delete(Roles role) {
+    public void deleteRole(Roles role) {
         this.roleFacade.remove(role);
     }
 
-    public String update(Roles role) {
+    public String updateRole(Roles role) {
 
         this.role = role;
         return "update";
     }
 
-    public String update() {
+    public String updateRole() {
 
         this.roleFacade.edit(role);
         return "role";

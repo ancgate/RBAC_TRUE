@@ -43,11 +43,11 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Roles.findByCreatedDate", query = "SELECT r FROM Roles r WHERE r.createdDate = :createdDate"),
     @NamedQuery(name = "Roles.findByCreatedBy", query = "SELECT r FROM Roles r WHERE r.createdBy = :createdBy"),
     @NamedQuery(name = "Roles.findByModifiedDate", query = "SELECT r FROM Roles r WHERE r.modifiedDate = :modifiedDate"),
-    @NamedQuery(name=  "Roles.loadForPermission", query="SELECT obj FROM Role obj LEFT JOIN obj.permissions perm WHERE perm.id = :permissionId ORDER BY obj.name"),
+    //@NamedQuery(name=  "Roles.loadForPermission", query="SELECT r FROM Role r LEFT JOIN r.permissions perm WHERE perm.id = :permissionId ORDER BY r.name"),
     @NamedQuery(name = "Roles.findByModifiedBy", query = "SELECT r FROM Roles r WHERE r.modifiedBy = :modifiedBy")})
 @NamedNativeQueries({
-	@NamedNativeQuery(name="Roles.removeAllPermissions", query="DELETE FROM Roles_has_Permissions WHERE role_id = ?1", resultClass=Roles.class),
-	@NamedNativeQuery(name="Roles.removeAllUsers", query="DELETE FROM Users_has_Roles WHERE role_id = ?1", resultClass=Roles.class)
+	@NamedNativeQuery(name="Roles.removeAllPermissions", query="DELETE FROM Roles_has_Permissions WHERE Roles_id = ?1", resultClass=Roles.class),
+	@NamedNativeQuery(name="Roles.removeAllUsers", query="DELETE FROM Users_has_Roles WHERE Roles_id = ?1", resultClass=Roles.class)
 })
 public class Roles implements Serializable {
 

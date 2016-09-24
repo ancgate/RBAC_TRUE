@@ -13,23 +13,24 @@
 
             <h:form>
                 <h1><h:outputText value="Create/Edit"/></h1>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="Id:" for="id" />
-                    <h:inputText id="id" value="#{roleController.role.id}" title="Id" required="true" requiredMessage="The Id field is required."/>
-                    <h:outputLabel value="Name:" for="name" />
-                    <h:inputText id="name" value="#{roleController.role.name}" title="Name" />
-                    <h:outputLabel value="Description:" for="description" />
-                    <h:inputText id="description" value="#{roleController.role.description}" title="Description" />
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Id:" for="id" />
+                    <p:inputText id="id" value="#{roleController.role.id}" title="Id" required="true" requiredMessage="The Id field is required."/>
+                    <p:outputLabel value="Name:" for="name" />
+                    <p:inputText id="name" value="#{roleController.role.name}" title="Name" />
+                    <p:outputLabel value="Description:" for="description" />
+                    <p:inputText id="description" value="#{roleController.role.description}" title="Description" />
                     
-                    <h:panelGrid columns="3">
-                        <h:outputLabel for="menu" value="Liste des permissions" />
+                    <p:panelGrid columns="3">
+                        <p:outputLabel for="menu" value="Liste des permissions" />
                         <p:selectCheckboxMenu id="menu" value="#{roleController.selectedPermissions}" label="Permissions"
                                               filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                             <f:selectItems value="#{roleController.permission}" var="perm" itemLabel="#{perm.name}" itemValue="#{perm.id}"/>
+                            <f:ajax execute="@form" render="@form"/>
                         </p:selectCheckboxMenu>
-                        <h:commandButton value="insertRole" action="#{roleController.insert()}"></h:commandButton>
-                    </h:panelGrid>
-                </h:panelGrid>
+                        <p:commandButton value="insertRole" action="#{roleController.insertRole()}"></p:commandButton>
+                    </p:panelGrid>
+                </p:panelGrid>
             </h:form>
         </f:view>
 
