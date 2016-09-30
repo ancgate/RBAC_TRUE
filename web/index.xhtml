@@ -15,7 +15,11 @@
             <h:form>
                 
                 <h:link value="Insert New user" outcome="insert"> </h:link>
+                <br />
                 <h:link value="Roles Management" outcome="role"> </h:link>
+                <br />
+                <h:link value="Insert New Role " outcome="insertRole"> </h:link>
+                <br />
                 <h1><h:outputText value="List"/></h1>
                 <h:dataTable value="#{userController.findAll()}" var="users">
                     <h:column>

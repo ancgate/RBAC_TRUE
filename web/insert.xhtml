@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -14,17 +15,17 @@
                 <h1><h:outputText value="Create/Edit"/></h1>
                 <h:panelGrid columns="2">
                     <h:outputLabel value="Id:" for="id" />
-                    <h:inputText id="id" value="#{userController.user.id}" title="Id" required="true" requiredMessage="The Id field is required."/>
+                    <p:inputText id="id" value="#{userController.user.id}" title="Id" required="true" requiredMessage="The Id field is required."/>
                     <h:outputLabel value="Username:" for="username" />
-                    <h:inputText id="username" value="#{userController.user.username}" title="Username" />
+                    <p:inputText id="username" value="#{userController.user.username}" title="Username" />
                     <h:outputLabel value="Password:" for="password" />
-                    <h:inputText id="password" value="#{userController.user.password}" title="Password" />
+                    <p:inputText id="password" value="#{userController.user.password}" title="Password" />
                     <h:outputLabel value="Firstname:" for="firstname" />
-                    <h:inputText id="firstname" value="#{userController.user.firstname}" title="Firstname" />
+                    <p:inputText id="firstname" value="#{userController.user.firstname}" title="Firstname" />
                     <h:outputLabel value="Lastname:" for="lastname" />
-                    <h:inputText id="lastname" value="#{userController.user.lastname}" title="Lastname" />
+                    <p:inputText id="lastname" value="#{userController.user.lastname}" title="Lastname" />
                     
-                    <h:commandButton value="insert" action="#{userController.insert()}"></h:commandButton>
+                    <p:commandButton value="insert" action="#{userController.insert()}"/>
                 </h:panelGrid>
             </h:form>
         </f:view>

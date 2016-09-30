@@ -14,26 +14,21 @@
             <h:form>
                 <h1><h:outputText value="Create/Edit"/></h1>
                 <p:panelGrid columns="2">
-                    <p:outputLabel value="Id:" for="id" />
-                    <p:inputText id="id" value="#{roleController.role.id}" title="Id" required="true" requiredMessage="The Id field is required."/>
                     <p:outputLabel value="Name:" for="name" />
                     <p:inputText id="name" value="#{roleController.role.name}" title="Name" />
                     <p:outputLabel value="Description:" for="description" />
-                    <p:inputText id="description" value="#{roleController.role.description}" title="Description" />
-                    
+                    <p:inputText id="description" value="#{roleController.role.description}" title="Description" />  
                     <p:panelGrid columns="3">
                         <p:outputLabel for="menu" value="Liste des permissions" />
                         <p:selectCheckboxMenu id="menu" value="#{roleController.selectedPermissions}" label="Permissions"
-                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                             <f:selectItems value="#{roleController.permission}" var="perm" itemLabel="#{perm.name}" itemValue="#{perm.id}"/>
-                            <f:ajax execute="@form" render="@form"/>
                         </p:selectCheckboxMenu>
-                        <p:commandButton value="insertRole" action="#{roleController.insertRole()}"></p:commandButton>
                     </p:panelGrid>
+                     <p:commandButton value="Insert New Role" action="#{roleController.insert()}"/>
                 </p:panelGrid>
             </h:form>
         </f:view>
 
     </h:body>
 </html>
-

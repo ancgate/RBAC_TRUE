@@ -9,20 +9,21 @@ import com.rbac.entities.Permissions;
 import com.rbac.entities.Roles;
 import com.rbac.model.PermissionsFacade;
 import com.rbac.model.RolesFacade;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.SessionScoped;
 
 /**
  *
  * @author jeffersonbienaime
  */
 @Named(value = "roleController")
-@Dependent
-public class RoleController {
+@SessionScoped
+public class RoleController implements Serializable {
 
     @EJB
     private RolesFacade roleFacade;
@@ -55,27 +56,29 @@ public class RoleController {
         return roleFacade.findAll();
     }
 
-    public String insertRole() {
-        for (Permissions perm : getSelectedPermissions() ){
-        role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
-        }        
-        this.roleFacade.create(role);
+    public String insert() {
+        
+       for (Permissions perm : getSelectedPermissions() ){
+        
+         role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
+        }  
+        
+        this.roleFacade.create(role); 
         this.role = new Roles();
         return "role";
-
     }
 
-    public void deleteRole(Roles role) {
+    public void delete(Roles role) {
         this.roleFacade.remove(role);
     }
 
-    public String updateRole(Roles role) {
+    public String update(Roles role) {
 
         this.role = role;
         return "update";
     }
 
-    public String updateRole() {
+    public String update() {
 
         this.roleFacade.edit(role);
         return "role";
