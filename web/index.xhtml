@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -12,53 +13,66 @@
 
         <f:view>
 
-            <h:form>
-                
+            <h:form id="form">
+
                 <h:link value="Insert New user" outcome="insert"> </h:link>
                 <br />
                 <h:link value="Roles Management" outcome="role"> </h:link>
                 <br />
                 <h:link value="Insert New Role " outcome="insertRole"> </h:link>
                 <br />
+                <h:link value="TabView" outcome="tabView"> </h:link>
+                <br />
                 <h1><h:outputText value="List"/></h1>
-                <h:dataTable value="#{userController.findAll()}" var="users">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Username"/>
-                        </f:facet>
+                <p:dataTable value="#{userController.findAll()}" var="users">
+                    <p:column headerText="Username">
                         <h:outputText value="#{users.username}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Password"/>
-                        </f:facet>
-                        <h:outputText value="#{users.password}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Firstname"/>
-                        </f:facet>
+                    </p:column>
+                    <p:column headerText="Password">
+                    </p:column>
+                    <p:column headerText="Firstname">
                         <h:outputText value="#{users.firstname}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Lastname"/>
-                        </f:facet>
+                    </p:column>
+                    <p:column headerText="LastName">
                         <h:outputText value="#{users.lastname}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="DELETE"/>
-                        </f:facet>
-                        <h:commandLink value="delete" action="#{userController.delete(users)}" onclick="return confirm('Etes-vous sure?')"></h:commandLink>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="UPDATE"/>
-                        </f:facet>
-                        <h:commandLink value="update" action="#{userController.update(users)}"></h:commandLink>
-                    </h:column>
-                </h:dataTable>
+                    </p:column>
+                    <p:column headerText="DELETE">
+                        <p:commandLink value="delete" action="#{userController.delete(users)}" onclick="return confirm('Etes-vous sure?')"></p:commandLink>
+                    </p:column>
+                    <p:column headerText="UPDATE">
+                        <p:commandLink value="update" action="#{userController.update(users)}"></p:commandLink>
+                    </p:column>
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton update=":form:userDetail" oncomplete="PF('userDialog').show()" icon="ui-icon-search" title="View">
+                            <f:setPropertyActionListener value="#{users}" target="#{userController.selectedUser}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+
+                <p:dialog header="User Info" widgetVar="userDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="userDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty userController.selectedUser}" columnClasses="label,value">
+                            <p:tabView rendered="#{not empty userController.selectedUser}">
+                                <p:tab title="Credentials Informations">
+                                    <h:panelGrid columns="2" cellpadding="10" columnClasses="label,value">
+                                        <h:outputText value="Username : " />
+                                        <h:outputText value="#{userController.selectedUser.username}" />
+                                        <h:outputText value="Password : " />
+                                        <h:outputText value="#{userController.selectedUser.password}" />
+                                    </h:panelGrid>
+                                </p:tab>
+                                <p:tab title="Personal Information">
+                                    <h:panelGrid columns="2" cellpadding="10">
+                                        <h:outputText value="Firstname : " />
+                                        <h:outputText value="#{userController.selectedUser.firstname}" />
+                                        <h:outputText value="Lastname : " />
+                                        <h:outputText value="#{userController.selectedUser.lastname}"/>
+                                    </h:panelGrid>
+                                </p:tab>
+                            </p:tabView>
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
             </h:form>
         </f:view>  
     </h:body>

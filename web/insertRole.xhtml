@@ -21,11 +21,11 @@
                     <p:panelGrid columns="3">
                         <p:outputLabel for="menu" value="Liste des permissions" />
                         <p:selectCheckboxMenu id="menu" value="#{roleController.selectedPermissions}" label="Permissions"
-filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                             <f:selectItems value="#{roleController.permission}" var="perm" itemLabel="#{perm.name}" itemValue="#{perm.id}"/>
                         </p:selectCheckboxMenu>
                     </p:panelGrid>
-                     <p:commandButton value="Insert New Role" action="#{roleController.insert()}"/>
+                    <p:commandButton value="Insert New Role" action="#{roleController.insert()}"/>
                 </p:panelGrid>
             </h:form>
         </f:view>

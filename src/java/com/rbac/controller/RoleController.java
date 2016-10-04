@@ -59,7 +59,6 @@ public class RoleController implements Serializable {
     public String insert() {
         
        for (Permissions perm : getSelectedPermissions() ){
-        
          role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
         }  
         

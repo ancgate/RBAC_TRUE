@@ -12,6 +12,11 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 /**
  *
@@ -19,11 +24,15 @@ import javax.ejb.EJB;
  */
 @Named(value = "userController")
 @SessionScoped
+//@ViewScoped
 public class UserController implements Serializable {
 
     @EJB
     private UsersFacade userFacade;
     private Users user = new Users();
+    
+    private Users selectedUser;
+    private List<Users> selectedUsers;
 
     public Users getUser() {
         return user;
@@ -32,6 +41,26 @@ public class UserController implements Serializable {
     public void setUser(Users user) {
         this.user = user;
     }
+
+    public Users getSelectedUser() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(Users selectedUser) {
+        this.selectedUser = selectedUser;
+    }
+
+    public List<Users> getSelectedUsers() {
+        return selectedUsers;
+    }
+
+    public void setSelectedUsers(List<Users> selectedUsers) {
+        this.selectedUsers = selectedUsers;
+    }
+    
+    
+    
+    
     
     public List<Users> findAll() {
         return userFacade.findAll();
@@ -69,6 +98,17 @@ public class UserController implements Serializable {
         
         this.userFacade.edit(user);
         return "index";
+    }
+    
+    
+    public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("Car Selected", ((Users) event.getObject()).getUsername());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage("Car Unselected", ((Users) event.getObject()).getUsername());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
         
     
