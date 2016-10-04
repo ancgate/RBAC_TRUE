@@ -9,8 +9,10 @@ import com.rbac.entities.Permissions;
 import com.rbac.entities.Roles;
 import com.rbac.model.PermissionsFacade;
 import com.rbac.model.RolesFacade;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -58,10 +60,11 @@ public class RoleController implements Serializable {
 
     public String insert() {
         
-       for (Permissions perm : getSelectedPermissions() ){
+       for (Permissions perm : selectedPermissions ){
          role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
         }  
         
+        //role.setPermissionsCollection(Arrays.asList(selectedPermissions));
         this.roleFacade.create(role); 
         this.role = new Roles();
         return "role";
