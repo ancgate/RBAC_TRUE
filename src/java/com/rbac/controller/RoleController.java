@@ -14,6 +14,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -33,7 +36,7 @@ public class RoleController implements Serializable {
     private PermissionsFacade permissionFacade;
 
     private Roles role = new Roles();
-    private Permissions[] selectedPermissions;
+    private Integer[] selectedPermissions;
     private List<Permissions> permissions;
 
     public RoleController() {
@@ -41,7 +44,7 @@ public class RoleController implements Serializable {
 
     @PostConstruct
     public void init() {
-        permissions = new ArrayList<Permissions>();
+        permissions = new ArrayList<>();
         //permissionFacade = new PermissionsFacade();
         permissions.addAll(permissionFacade.findAll());
     }
@@ -59,30 +62,12 @@ public class RoleController implements Serializable {
     }
 
     public String insert() {
-
-//       for (Permissions perm : selectedPermissions ){
-//         role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
-//        }
-
-
-//        getPermission().stream().forEach((perm) -> {
-//            role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
-//        });
-        //role.setPermissionsCollection(Arrays.asList(selectedPermissions));
         
-        
-        //Permissions perm = new Permissions();
-        //perm.setName("Manger le Pain");
-        //permissions.add(perm);
-        //role.setPermissionsCollection(permissions);
-        
-        //permissions.add(permissionFacade.getPermissionbyID(57));
-        //permissions.add(permissionFacade.getPermissionbyID(58));
-        //permissions.add(permissionFacade.getPermissionbyID(59));
-        
-        permissions.addAll(Arrays.asList(selectedPermissions));
-        role.setPermissionsCollection(permissions);
-        this.roleFacade.edit(role);
+        List<Permissions> collect = Arrays.stream(selectedPermissions).map(
+                permissionFacade::getPermissionbyID)
+                .collect(Collectors.toList());
+        role.setPermissionsCollection(collect);
+        this.roleFacade.create(role);
         this.role = new Roles();
         return "role";
     }
@@ -103,11 +88,11 @@ public class RoleController implements Serializable {
         return "role";
     }
 
-    public Permissions[] getSelectedPermissions() {
+    public Integer[] getSelectedPermissions() {
         return selectedPermissions;
     }
 
-    public void setSelectedPermissions(Permissions[] selectedPermissions) {
+    public void setSelectedPermissions(Integer[] selectedPermissions) {
         this.selectedPermissions = selectedPermissions;
     }
 
