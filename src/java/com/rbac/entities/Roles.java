@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -75,8 +76,12 @@ public class Roles implements Serializable {
     @Size(max = 100)
     @Column(name = "modifiedBy")
     private String modifiedBy;
-    @ManyToMany(mappedBy = "rolesCollection")
+    @JoinTable(name = "Roles_has_Permissions", joinColumns = {
+        @JoinColumn(name = "Permissions_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "Roles_id", referencedColumnName = "id")})
+    @ManyToMany
     private Collection<Permissions> permissionsCollection;
+    
     @JoinTable(name = "Users_has_Roles", joinColumns = {
         @JoinColumn(name = "Roles_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "Users_id", referencedColumnName = "id")})

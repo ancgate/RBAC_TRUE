@@ -8,6 +8,7 @@ package com.rbac.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,10 +53,7 @@ public class Permissions implements Serializable {
     @Size(max = 100)
     @Column(name = "description")
     private String description;
-    @JoinTable(name = "Roles_has_Permissions", joinColumns = {
-        @JoinColumn(name = "Permissions_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "Roles_id", referencedColumnName = "id")})
-    @ManyToMany
+    @ManyToMany(mappedBy = "permissionsCollection", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private Collection<Roles> rolesCollection;
 
     public Permissions() {

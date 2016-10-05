@@ -8,6 +8,7 @@ package com.rbac.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +56,7 @@ public class Users implements Serializable {
     @Size(max = 45)
     @Column(name = "lastname")
     private String lastname;
-    @ManyToMany(mappedBy = "usersCollection")
+    @ManyToMany(mappedBy = "usersCollection", cascade = CascadeType.PERSIST)
     private Collection<Roles> rolesCollection;
 
     public Users() {

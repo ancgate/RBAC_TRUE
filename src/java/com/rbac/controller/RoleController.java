@@ -42,7 +42,7 @@ public class RoleController implements Serializable {
     @PostConstruct
     public void init() {
         permissions = new ArrayList<Permissions>();
-        // permissionFacade = new PermissionsFacade();
+        //permissionFacade = new PermissionsFacade();
         permissions.addAll(permissionFacade.findAll());
     }
 
@@ -59,13 +59,30 @@ public class RoleController implements Serializable {
     }
 
     public String insert() {
-        
-       for (Permissions perm : selectedPermissions ){
-         role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
-        }  
-        
+
+//       for (Permissions perm : selectedPermissions ){
+//         role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
+//        }
+
+
+//        getPermission().stream().forEach((perm) -> {
+//            role.setPermissionsCollection(permissionFacade.getPermissionbyID(perm.getId()));
+//        });
         //role.setPermissionsCollection(Arrays.asList(selectedPermissions));
-        this.roleFacade.create(role); 
+        
+        
+        //Permissions perm = new Permissions();
+        //perm.setName("Manger le Pain");
+        //permissions.add(perm);
+        //role.setPermissionsCollection(permissions);
+        
+        //permissions.add(permissionFacade.getPermissionbyID(57));
+        //permissions.add(permissionFacade.getPermissionbyID(58));
+        //permissions.add(permissionFacade.getPermissionbyID(59));
+        
+        permissions.addAll(Arrays.asList(selectedPermissions));
+        role.setPermissionsCollection(permissions);
+        this.roleFacade.edit(role);
         this.role = new Roles();
         return "role";
     }
@@ -94,7 +111,7 @@ public class RoleController implements Serializable {
         this.selectedPermissions = selectedPermissions;
     }
 
-    public List<Permissions> getPermission() {
+    public List<Permissions> getPermissions() {
         return permissions;
     }
 

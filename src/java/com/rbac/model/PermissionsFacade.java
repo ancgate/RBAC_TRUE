@@ -32,11 +32,11 @@ public class PermissionsFacade extends AbstractFacade<Permissions> {
     }
     
     
-    public List<Permissions> getPermissionbyID(Integer p){
+    public Permissions getPermissionbyID(Integer p){
         
-       TypedQuery<Permissions> query = em.createNamedQuery("Users.findById", Permissions.class);
+       TypedQuery<Permissions> query = em.createNamedQuery("Permissions.findById", Permissions.class);
        query.setParameter("id", p);
-       return query.getResultList();
+       return query.getSingleResult();
     }
     
 }
