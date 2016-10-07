@@ -12,16 +12,13 @@
 
 
         <f:view>
-
             <h:form id="form">
-
-                <h:link value="Insert New user" outcome="insert"> </h:link>
+                <p:link value="Insert New user" outcome="insert"> </p:link>
                 <br />
-                <h:link value="Roles Management" outcome="role"> </h:link>
+                <p:link value="Roles Management" outcome="role"> </p:link>
                 <br />
-                <h:link value="Insert New Role " outcome="insertRole"> </h:link>
+                <p:link value="Insert New Role " outcome="insertRole"> </p:link>
                 <br />
-                <h:link value="TabView" outcome="tabView"> </h:link>
                 <br />
                 <h1><h:outputText value="List"/></h1>
                 <p:dataTable value="#{userController.findAll()}" var="users">

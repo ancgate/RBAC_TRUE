@@ -59,9 +59,6 @@ public class UserController implements Serializable {
     }
     
     
-    
-    
-    
     public List<Users> findAll() {
         return userFacade.findAll();
     }
